@@ -1,6 +1,6 @@
 {
   "name": "Udemy voice over",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "manifest_version": 2,
   "description": "Speech voice over Udemy course",
   "homepage_url": "https://github.com/pin-cnx/udemy-voice-over",
@@ -11,8 +11,10 @@
   },
   "default_locale": "en",
   "permissions": [
+    "storage",
     "https://www.udemy.com/course/*"
   ],
+  "options_page": "options.html",
   "content_scripts": [
     {
       "matches": [

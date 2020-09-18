@@ -103,6 +103,9 @@ function callT2S (text, callback, errorCallback = null) {
       'type': 'POST',
       'url': 'https://tts.chiangmaioutsource.com/api/translate',
       'contentType': 'application/json',
+      headers: {
+        "Authorization": accessToken
+      },
       'data': JSON.stringify({input: {text: text}}),
       'dataType': 'json',
       'success': (data, status) => {
@@ -191,7 +194,7 @@ let lastMsg = ''
 let skip = 0
 let cache_text = null
 let cache_data = null
-
+let accessToken = null
 chrome.extension.sendMessage({}, function (response) {
   var readyStateCheckInterval = setInterval(function () {
     if (document.readyState === 'complete') {
@@ -201,6 +204,12 @@ chrome.extension.sendMessage({}, function (response) {
       // This part of the script triggers when page is done loading
       console.log('Hello. This message was sent from scripts/inject.js')
       // ----------------------------------------------------------
+
+      chrome.storage.sync.get({
+        accessToken: ''
+      }, function (items) {
+        accessToken = items.accessToken
+      })
 
       enable_play = true
       fetchVoice()
