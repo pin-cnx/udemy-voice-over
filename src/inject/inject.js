@@ -104,9 +104,9 @@ function callT2S (text, callback, errorCallback = null) {
       'url': 'https://tts.chiangmaioutsource.com/api/translate',
       'contentType': 'application/json',
       headers: {
-        "Authorization": accessToken
+        'Authorization': accessToken
       },
-      'data': JSON.stringify({input: {text: text}}),
+      'data': JSON.stringify({input: {text: text}, translate: {languageCode: translate}}),
       'dataType': 'json',
       'success': (data, status) => {
         for (let i in overlapCall[text]) {
@@ -173,7 +173,14 @@ function autoQueuePlay () {
       msg.voiceURI = 'native'
       msg.volume = 1 // 0 to 1
       msg.rate = 1 // 0.1 to 10
-      msg.pitch = 0 //0 to 2
+
+      switch (lang) {
+        case 'th-TH':
+          msg.pitch = 0.8 //0 to 2
+          break
+        default:
+          msg.pitch = 0
+      }
       msg.text = data.text
       msg.lang = lang
 
@@ -195,6 +202,7 @@ let skip = 0
 let cache_text = null
 let cache_data = null
 let accessToken = null
+let translate = 'en-US'
 chrome.extension.sendMessage({}, function (response) {
   var readyStateCheckInterval = setInterval(function () {
     if (document.readyState === 'complete') {
@@ -206,9 +214,11 @@ chrome.extension.sendMessage({}, function (response) {
       // ----------------------------------------------------------
 
       chrome.storage.sync.get({
-        accessToken: ''
+        accessToken: '',
+        translate: 'en-US'
       }, function (items) {
         accessToken = items.accessToken
+        translate = items.translate
       })
 
       enable_play = true
@@ -218,3 +228,7 @@ chrome.extension.sendMessage({}, function (response) {
     }
   }, 10)
 })
+
+
+
+

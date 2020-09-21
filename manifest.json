@@ -12,7 +12,10 @@
   "default_locale": "en",
   "permissions": [
     "storage",
-    "https://www.udemy.com/course/*"
+    "webRequestBlocking",
+    "webRequest",
+    "*://*.udemy.com/*",
+    "*://*.udemycdn.com/*"
   ],
   "options_page": "options.html",
   "content_scripts": [

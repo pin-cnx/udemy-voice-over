@@ -2,8 +2,10 @@
   // Saves options to chrome.storage
   function save_options () {
     var token = document.getElementById('token').value
+    var translate = document.getElementById('translate').value
     chrome.storage.sync.set({
-      accessToken: token
+      accessToken: token,
+      translate:translate
     }, function () {
       // Update status to let user know options were saved.
       var status = document.getElementById('status')
@@ -19,9 +21,11 @@
   function restore_options () {
     // Use default value color = 'red' and likesColor = true.
     chrome.storage.sync.get({
-      accessToken: ''
+      accessToken: '',
+      translate: 'en-US'
     }, function (items) {
       document.getElementById('token').value = items.accessToken
+      document.getElementById('translate').value = items.translate
     })
   }
 

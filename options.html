@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head><title>My Test Extension Options</title></head>
-<body>
+<head><title>Udemy Voice Over options</title></head>
+<body style="line-height: 2">
 For premium text to speech Synthesis (Google wavenet)<br/>
 <label>
-  Enter an access token here <br/>
+  Premium token
   <input id="token" size="72">
 </label>
+<br/>
+<label>
+  Translate language <select id="translate">
+  <option value="en-US">English</option>
+  <option value="th-TH">Thai</option>
+  <option value="zh-CN">Chinese</option>
+</select>
+
+</label>
+
+
 <div id="status"></div>
-<button id="save">Save</button><br/>
+<button id="save">Save</button>
+<br/>
 <em>(email me for token at <a href="mailto:pppstudio.gm@gmail.com">pppstudio.gm@gmail.com</a>)</em>
 <script src="options.js"></script>
 </body>
